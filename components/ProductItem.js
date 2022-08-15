@@ -14,7 +14,7 @@ import { FiShoppingCart } from "react-icons/fi";
 
 function Rating({ rating, numReviews }) {
   return (
-    <Box d="flex" alignItems="center">
+    <Flex alignItems="center">
       {Array(5)
         .fill("")
         .map((_, i) => {
@@ -36,13 +36,13 @@ function Rating({ rating, numReviews }) {
       <Box as="span" ml="2" color="gray.600" fontSize="sm">
         {numReviews} review{numReviews > 1 && "s"}
       </Box>
-    </Box>
+    </Flex>
   );
 }
 
-function ProductItem({ product }) {
+function ProductItem({ product, onHandleAddToCart }) {
   return (
-    <Flex p={50} w="full" alignItems="center" justifyContent="center">
+    <Flex alignItems="center" justifyContent="center" pb={20}>
       <Box
         bg={useColorModeValue("white", "gray.800")}
         maxW="sm"
@@ -65,8 +65,9 @@ function ProductItem({ product }) {
           src={product.image}
           alt={`Picture of ${product.title}`}
           roundedTop="lg"
-          w="300px"
-          h="500px"
+          m="auto"
+          w="300"
+          h="400"
         />
 
         <Box p="6" w="400px">
@@ -113,12 +114,20 @@ function ProductItem({ product }) {
             <chakra.a display={"flex"}>
               <Icon
                 as={FiShoppingCart}
-                h={40}
-                w={40}
+                h={20}
+                w={20}
                 alignSelf={"center"}
                 m="0 auto"
                 pt={10}
                 cursor="pointer"
+                onClick={() =>
+                  onHandleAddToCart({
+                    productId: product.id,
+                    image: product.image,
+                    title: product.title,
+                    price: product.price,
+                  })
+                }
               />
             </chakra.a>
           </Tooltip>

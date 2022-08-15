@@ -15,14 +15,14 @@ export default function ProductListByCategory({ category, products }) {
 export async function getServerSideProps(context) {
   const { params } = context;
   const { category } = params;
-  const response = await axios.get(
-    `http://localhost/products?category=${category}`
+  const { data } = await axios.get(
+    `https://fakestoreapi.com/products/category/${category}`
   );
 
   // ** response.data **
   return {
     props: {
-      products: response.data,
+      products: data,
       category,
     },
   };

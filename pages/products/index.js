@@ -1,6 +1,6 @@
 import axios from "axios";
 import Products from "../../components/Products";
-export default function products({ products }) {
+export default function HomeProduct({ products }) {
   return (
     <>
       List of Products
@@ -10,7 +10,7 @@ export default function products({ products }) {
 }
 
 export async function getServerSideProps() {
-  const { data } = await axios.get("http://localhost/products");
+  const { data } = await axios.get("https://fakestoreapi.com/products");
   return {
     props: {
       products: data,
